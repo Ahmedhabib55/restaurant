@@ -47,8 +47,6 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
       if (!res.ok) {
         throw new Error("Failed to submit form");
       }
-
-      const responseData = await res.json();
       onClose();
       router.push("/");
     } catch (error) {
@@ -62,7 +60,7 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
 
   return (
     <form onSubmit={handleSubmit(submit)}>
-      <div className="mx-auto w-[300px] space-y-4 rounded-lg bg-white bg-opacity-20 p-6 shadow-lg backdrop-blur-lg">
+      <div className="mx-auto w-[300px] space-y-4 rounded-lg bg-white/20 p-6 shadow-lg backdrop-blur-lg">
         <div>
           <input
             placeholder="الاسم"
