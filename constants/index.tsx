@@ -5,19 +5,19 @@ export const sandiwtshatShabey: Sandwich[] = [
     _id: "1",
     name: "فلافل ",
     ingredients: [],
-    price: 10,
+    price: 7,
   },
   {
     _id: "2",
     name: "فلافل بالبيض المسلوق ",
     ingredients: [],
-    price: 10,
+    price: 15,
   },
   {
     _id: "3",
     name: "فلافل باذنجان",
     ingredients: [],
-    price: 10,
+    price: 15,
   },
   {
     _id: "4",
@@ -29,43 +29,43 @@ export const sandiwtshatShabey: Sandwich[] = [
     _id: "5",
     name: "فول ",
     ingredients: [],
-    price: 10,
+    price: 7,
   },
   {
     _id: "6",
     name: "فول زيت حار ",
     ingredients: [],
-    price: 10,
+    price: 7,
   },
   {
     _id: "7",
     name: "فول بالبيض المسلوق ",
     ingredients: [],
-    price: 10,
+    price: 15,
   },
   {
     _id: "8",
     name: "بطاطس مقليه ",
     ingredients: [],
-    price: 10,
+    price: 12,
   },
   {
     _id: "9",
     name: "بطاطس سلطه وطحينه",
     ingredients: [],
-    price: 10,
+    price: 15,
   },
   {
     _id: "10",
     name: "بطاطس كاتشب",
     ingredients: [],
-    price: 10,
+    price: 15,
   },
   {
     _id: "11",
     name: "بيض مسلوق",
     ingredients: [],
-    price: 10,
+    price: 12,
   },
   {
     _id: "12",
@@ -97,42 +97,42 @@ export const talab: Talab[] = [
   {
     _id: "0",
     name: "طلب فطار",
-    ingredients: ["فلافل", "بطاطس مقليه", "بيض مسلوق", "باذنجان مقلي", "عيش"],
-    price: 20,
+    ingredients: ["فلافل", "بطاطس مقليه", "فول", "باذنجان مقلي", "عيش"],
+    price: 60,
   },
 
   {
     _id: "1",
-    name: "طلب فول",
-    ingredients: ["فلافل", "بطاطس مقليه", "بيض مسلوق", "باذنجان مقلي", "عيش"],
-    price: 20,
+    name: "فرخه مشويه كاملة ",
+    ingredients: ["عيش", "مخلل", "طحنيه", "", ""],
+    price: 320,
+  },
+  {
+    _id: "2",
+    name: "ربع فرخه مشويه",
+    ingredients: ["عيش", "مخلل", "طحنيه", "", ""],
+    price: 80,
   },
 ];
 
 export const sandiwtshatLahma = [
   {
     _id: "0",
-    name: "حواوشي",
+    name: "حواوشي عيش بلدي",
     ingredients: [],
-    price: 20,
-  },
-  {
-    _id: "1",
-    name: "حواوشي موتزاريلا",
-    ingredients: [],
-    price: 20,
+    price: 27,
   },
   {
     _id: "2",
-    name: "كفته ",
+    name: "كفته عيش بلدي",
     ingredients: [],
-    price: 20,
+    price: 40,
   },
   {
     _id: "3",
-    name: "كبده اسكندراني ",
+    name: "كبده اسكندراني عيش بلدي",
     ingredients: [],
-    price: 20,
+    price: 30,
   },
 ];
 
@@ -159,7 +159,7 @@ export const fateer: Sandwich[] = [
     _id: "4",
     name: "طبق جنبه حادقه  ٣ قطع",
     ingredients: [],
-    price: 50,
+    price: 45,
   },
 ];
 
@@ -292,19 +292,19 @@ export const drinks: Sandwich[] = [
   },
   {
     _id: "3",
-    name: " قهوة ",
+    name: " قهوة مظبوطه ",
     ingredients: [],
     price: 20,
   },
   {
     _id: "4",
-    name: "قهوة",
+    name: "قهوة مانو ",
     ingredients: [],
     price: 20,
   },
   {
     _id: "5",
-    name: "عصير مانجو",
+    name: " قهوة زياده",
     ingredients: [],
     price: 20,
   },
@@ -319,6 +319,18 @@ export const drinks: Sandwich[] = [
     name: "مياه معدنية",
     ingredients: [],
     price: 7,
+  },
+  {
+    _id: "8",
+    name: "اندومي كبير",
+    ingredients: [],
+    price: 25,
+  },
+  {
+    _id: "9",
+    name: "اندومي صغير",
+    ingredients: [],
+    price: 20,
   },
 ];
 
