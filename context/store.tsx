@@ -58,6 +58,7 @@ const reducer = (state: StoreState, action: Action): StoreState => {
               ? {
                   ...item,
                   quantity: item.quantity + 1,
+                  price: item.price,
                   totalPrice: (item.quantity + 1) * item.price, // Calculate total price based on price
                 }
               : item
