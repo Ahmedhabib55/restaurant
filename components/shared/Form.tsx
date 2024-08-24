@@ -24,6 +24,7 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
 
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     register,
@@ -34,6 +35,7 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
 
   const submit = async (formData: FieldValues) => {
     setIsSubmitting(true);
+    setErrorMessage(null);
     try {
       const { name, phone, address, order, totalPrice } = formData;
       const res = await fetch("/api/submit", {
@@ -41,17 +43,27 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, phone, address, order, totalPrice }),
+        body: JSON.stringify({
+          name,
+          phone,
+          address,
+          order,
+          totalPrice,
+          spreadsheetId: process.env.NEXT_PUBLIC_SPREADSHEET_ID,
+        }),
       });
 
       if (!res.ok) {
-        throw new Error("Failed to submit form");
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to submit form");
       }
       onClose();
       router.push("/");
     } catch (error) {
       console.error("Error submitting form:", error);
-      // Handle error (e.g., show error message to user)
+      setErrorMessage(
+        error instanceof Error ? error.message : "An unknown error occurred"
+      );
     } finally {
       setIsSubmitting(false);
       dispatch({ type: "store/clearCart" });
@@ -114,6 +126,9 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
             className="mt-1 block w-full rounded-md border-gray-300 p-2 text-black shadow-sm focus:outline-none"
           />
         </div>
+        {errorMessage && (
+          <div className="text-center text-red-500">{errorMessage}</div>
+        )}
         <div>
           <button
             type="submit"

@@ -26,7 +26,10 @@ const Menu = () => {
             Menu
           </h3>
         </div>
-        <nav className="flex h-16 items-center justify-center text-white">
+        <nav
+          id="menu"
+          className="flex h-16 items-center justify-center text-white"
+        >
           <ul className="direction-rtl flex items-center justify-center gap-2 sm:gap-4">
             {filterMenu.map((item) => (
               <li

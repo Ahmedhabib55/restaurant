@@ -22,8 +22,8 @@ const Header = () => {
                 width={24}
                 height={24}
               />
-              <Link href="#drink" className="text-sm font-semibold text-white">
-                Drinks
+              <Link href="#menu" className="text-sm font-semibold text-white">
+                Menu
               </Link>
             </li>
             <li className="flex items-center justify-between gap-1">
