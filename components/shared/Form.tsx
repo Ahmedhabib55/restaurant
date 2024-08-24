@@ -10,7 +10,7 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ onClose }) => {
-  const { cart, dispatch } = useStore();
+  const { cart } = useStore();
   const itemsWithQuantity = cart
     .filter((item) => item.quantity > 0)
     .map((item) => ({
@@ -38,7 +38,9 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
     setErrorMessage(null);
     try {
       const { name, phone, address, order, totalPrice } = formData;
-      const res = await fetch("https://tutlab-ay.vercel.app/api/submit", {
+      console.log("Submitting data:", { name, phone, address, order, totalPrice });
+      
+      const res = await fetch("/api/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,11 +55,21 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
         }),
       });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        console.error("Full error response:", errorData); // Log full error response
-        throw new Error(errorData.message || "Failed to submit form");
+      console.log("Response status:", res.status);
+      console.log("Response headers:", Object.fromEntries(res.headers.entries()));
+
+      let responseData;
+      try {
+        responseData = await res.json();
+        console.log("Response data:", responseData);
+      } catch (e) {
+        console.log("Failed to parse response as JSON:", await res.text());
       }
+
+      if (!res.ok) {
+        throw new Error(responseData?.message || `HTTP error! status: ${res.status}`);
+      }
+
       onClose();
       router.push("/");
     } catch (error) {
@@ -67,7 +79,6 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
       );
     } finally {
       setIsSubmitting(false);
-      dispatch({ type: "store/clearCart" });
     }
   };
 
