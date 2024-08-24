@@ -29,6 +29,7 @@ const Sandwiches = ({
           payload: {
             _id: id,
             name: sandwichName,
+            price: sandwichPrice,
             quantity: 1,
             totalPrice: sandwichPrice,
           },
