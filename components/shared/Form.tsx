@@ -38,7 +38,7 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
     setErrorMessage(null);
     try {
       const { name, phone, address, order, totalPrice } = formData;
-      const res = await fetch("/api/submit", {
+      const res = await fetch("https://tutlab-ay.vercel.app/api/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,6 +55,7 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
 
       if (!res.ok) {
         const errorData = await res.json();
+        console.error("Full error response:", errorData); // Log full error response
         throw new Error(errorData.message || "Failed to submit form");
       }
       onClose();
