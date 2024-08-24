@@ -10,15 +10,16 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ onClose }) => {
-  const { cart } = useStore();
+  const { cart, dispatch } = useStore();
   const itemsWithQuantity = cart
     .filter((item) => item.quantity > 0)
     .map((item) => ({
       name: item.name,
       quantity: item.quantity,
     }));
+
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.totalPrice * item.quantity,
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
 
@@ -38,8 +39,7 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
     setErrorMessage(null);
     try {
       const { name, phone, address, order, totalPrice } = formData;
-      console.log("Submitting data:", { name, phone, address, order, totalPrice });
-      
+
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: {
@@ -56,7 +56,10 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
       });
 
       console.log("Response status:", res.status);
-      console.log("Response headers:", Object.fromEntries(res.headers.entries()));
+      console.log(
+        "Response headers:",
+        Object.fromEntries(res.headers.entries())
+      );
 
       let responseData;
       try {
@@ -67,7 +70,9 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
       }
 
       if (!res.ok) {
-        throw new Error(responseData?.message || `HTTP error! status: ${res.status}`);
+        throw new Error(
+          responseData?.message || `HTTP error! status: ${res.status}`
+        );
       }
 
       onClose();
@@ -79,6 +84,7 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
       );
     } finally {
       setIsSubmitting(false);
+      dispatch({ type: "store/clearCart" });
     }
   };
 
@@ -123,7 +129,9 @@ const Form: React.FC<FormProps> = ({ onClose }) => {
           <input
             type="text"
             id="order"
-            value={itemsWithQuantity.map((item) => item.name).join(", ")}
+            value={itemsWithQuantity
+              .map((item) => `${item.name} (${item.quantity})`)
+              .join(", ")}
             {...register("order")}
             className="mt-1 block w-full rounded-md border-gray-300 p-2 text-black shadow-sm focus:outline-none"
           />

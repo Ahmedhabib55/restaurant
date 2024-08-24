@@ -6,7 +6,7 @@ interface CartItem {
   name: string;
   quantity: number;
   price: number;
-  totalPrice: number;
+  // totalPrice: number;
   // Add other properties of cart items here
 }
 
@@ -77,7 +77,7 @@ const reducer = (state: StoreState, action: Action): StoreState => {
         ...state,
         cart: state.cart.filter((item) => item._id !== action.payload),
       };
-    case "store/increaseQuantity":
+    case "store/increaseQuantity": {
       return {
         ...state,
         cart: state.cart.map((item) =>
@@ -85,11 +85,12 @@ const reducer = (state: StoreState, action: Action): StoreState => {
             ? {
                 ...item,
                 quantity: item.quantity + 1,
-                totalPrice: (item.quantity + 1) * item.price, // Calculate total price based on price
+                totalPrice: (item.quantity + 1) * item.price,
               }
             : item
         ),
       };
+    }
     case "store/decreaseQuantity":
       return {
         ...state,

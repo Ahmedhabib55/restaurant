@@ -4,7 +4,7 @@ import { useStore } from "@/context/store";
 import { formatCurrencyEGP } from "@/utils/helpers";
 
 function CartItem({ item }) {
-  const { _id, name, quantity, totalPrice } = item;
+  const { _id, name, quantity, price } = item;
   const { dispatch } = useStore();
 
   const handleIncreaseQuantity = (_id) => {
@@ -26,7 +26,7 @@ function CartItem({ item }) {
       </p>
       <div className="flex items-center justify-between gap-4 sm:gap-6">
         <p className="mr-4 text-sm font-bold">
-          {formatCurrencyEGP(totalPrice)}
+          {formatCurrencyEGP(price * quantity)}
         </p>
 
         <div

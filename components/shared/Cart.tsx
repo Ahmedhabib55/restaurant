@@ -12,7 +12,7 @@ function Cart() {
   const [openModal, setOpenModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.totalPrice * item.quantity,
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
   const handleClearCart = () => {

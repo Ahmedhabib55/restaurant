@@ -9,32 +9,23 @@ const Sandwiches = ({
   title: string;
   arrayOfSandwich: Sandwich[];
 }) => {
-  const { dispatch, cart } = useStore();
+  const { dispatch } = useStore();
 
   function handleClick(id: string) {
     const foundSandwich = arrayOfSandwich.find(
       (sandwich) => sandwich._id === id
     );
-    const sandwichName = foundSandwich?.name;
-    const sandwichPrice = foundSandwich?.price;
 
-    if (sandwichName && sandwichPrice) {
-      const existingItem = cart.find((item) => item._id === id);
-
-      if (existingItem) {
-        dispatch({ type: "store/increaseQuantity", payload: id });
-      } else {
-        dispatch({
-          type: "store/addToCart",
-          payload: {
-            _id: id,
-            name: sandwichName,
-            price: sandwichPrice,
-            quantity: 1,
-            totalPrice: sandwichPrice,
-          },
-        });
-      }
+    if (foundSandwich) {
+      dispatch({
+        type: "store/addToCart",
+        payload: {
+          _id: id,
+          quantity: 1,
+          name: foundSandwich.name,
+          price: foundSandwich.price,
+        },
+      });
     }
   }
 
