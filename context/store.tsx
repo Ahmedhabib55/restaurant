@@ -5,6 +5,7 @@ interface CartItem {
   _id: string;
   name: string;
   quantity: number;
+  price: number;
   totalPrice: number;
   // Add other properties of cart items here
 }
@@ -57,14 +58,18 @@ const reducer = (state: StoreState, action: Action): StoreState => {
               ? {
                   ...item,
                   quantity: item.quantity + 1,
-                  totalPrice:
-                    (item.totalPrice / item.quantity) * (item.quantity + 1),
+                  totalPrice: (item.quantity + 1) * item.price, // Calculate total price based on price
                 }
               : item
           ),
         };
       } else {
-        return { ...state, cart: [...state.cart, action.payload] };
+        // Ensure the new item has the correct totalPrice
+        const newItem = {
+          ...action.payload,
+          totalPrice: action.payload.quantity * action.payload.price,
+        };
+        return { ...state, cart: [...state.cart, newItem] };
       }
     }
     case "store/removeFromCart":
@@ -80,8 +85,7 @@ const reducer = (state: StoreState, action: Action): StoreState => {
             ? {
                 ...item,
                 quantity: item.quantity + 1,
-                totalPrice:
-                  (item.quantity + 1) * (item.totalPrice / item.quantity), // Recalculate total price
+                totalPrice: (item.quantity + 1) * item.price, // Calculate total price based on price
               }
             : item
         ),
@@ -94,8 +98,7 @@ const reducer = (state: StoreState, action: Action): StoreState => {
             ? {
                 ...item,
                 quantity: item.quantity - 1,
-                totalPrice:
-                  (item.quantity - 1) * (item.totalPrice / item.quantity),
+                totalPrice: (item.quantity - 1) * item.price, // Calculate total price based on price
               }
             : item
         ),
